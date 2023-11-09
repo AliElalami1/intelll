@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #bbb4b4;
+    overscroll-behavior: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#rock {
+    background-color: #f11919;
+    transition-duration :0.4s;
+}
+#rock:hover {
+    background-color: #a90000;
+    transition-duration :0.4s;
+}
+#paper {
+    background-color: #18d53e;
+    transition-duration :0.4s;
+}
+#paper:hover {
+    background-color: #149a2f;
+    transition-duration :0.4s;
+}
+#scissors {
+    background-color: #007BFF;
+    transition-duration :0.4s;
+}
+#scissors:hover {
+    background-color: #0052a9;
+    transition-duration :0.4s;
+}
+
+button {
+    /* background-color: #4CAF50; */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+#info {
+    padding: 10px;
+    margin: 0%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    width: 90%;
+    max-width: 700px;
+}
+.intro {
+    padding: 10px;
+    margin: 0%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    width: 90%;
+    max-width: 700px;
+}   
+.answer1 {
+    padding: 10px;
+    margin: 0%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    width: 90%;
+    max-width: 700px;
+    /* min-height: 130px; */
+}   
+.container {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+.button-container {
+   display:flex; 
+   justify-content:center; 
+   gap:10px; 
+}
+.image-container {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:  1fr;
+    gap: 10px;
+    justify-items: center;
+    height: 118px;
+}
+.names {
+    font-weight: 700;
+    color: #333;
+
+}
+
+img{
+    height: 100px;
+}
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+color: #333;
+text-align: center;
+margin: 0%;
+margin-top: 20px;   
+}
+#resetBtn {
+background-color: #6c757d;
+transition-duration :0.4s; 
+}
+#resetBtn:hover {
+background-color: #585c60;
+transition-duration :0.4s; 
+}
+
+    </style> 
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Rock, Paper, Scissors!</h1>
+    <p class="intro">This is a game of Rock, Paper, Scissors against a computer. Your goal is to beat the computer at this game. Click one of the colored buttons to make your choice and the computer will try to beat you. Press the reset button if you want to reset the game from 0.</p>
+    
+    <div class="answer1">
+        <div class="image-container">
+            <div class="choice-container">
+                <div class="names">User:
+                    <div id="img"></div>
+                </div>
+            </div>
+            <div class="choice-container">
+                <div class="names">Computer:
+                    <div id="img2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p id="info">
+        User:
+        <br>Computer:
+        <br>____
+        <br>User score:
+        <br>Computer score:
+    </p>
+    <div class="button-container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button> 
+        <button id="resetBtn">Reset</button>  
+    </div>
+</div>
+
+<script> 
+let userScore = 0;
+let computerScore = 0;
+let userChoices = [];
+let gameResults = [];
+let choices = ['rock', 'paper', 'scissors'];
+let lastComputerChoice;
+let rockButton = document.getElementById('rock');
+let paperButton = document.getElementById('paper');
+let scissorsButton = document.getElementById('scissors');
+let resetButton = document.getElementById('resetBtn');
+
+// Add event listener
+resetButton.addEventListener('click', function() { resetGame(); });
+
+function resetGame() {
+    userScore = 0;
+    computerScore = 0;
+    userChoices = [];
+    gameResults = [];
+    lastComputerChoice = undefined;
+
+    document.getElementById('info').innerHTML = "User: <br>Computer: <br>____ <br>User score: <br>Computer score:";
+    document.getElementById('info').style.color = "black"
+    document.getElementById('img').innerHTML = "";
+    document.getElementById('img2').innerHTML = "";
+}
+// Add event listeners
+rockButton.addEventListener('click', function() { userPlay('rock'); });
+paperButton.addEventListener('click', function() { userPlay('paper'); });
+scissorsButton.addEventListener('click', function() { userPlay('scissors'); });
+
+function userPlay(userChoice) {
+    let computerChoice = getComputerChoice();
+
+    userChoices.push(userChoice);
+
+    document.getElementById('info').innerHTML = "User: " + userChoice + "<br>Computer: " + computerChoice;
+
+    if (computerChoice === 'rock') {
+        document.getElementById('img2').innerHTML = "<img src='rock.png'>";
+    } else if (computerChoice === 'paper') {
+        document.getElementById('img2').innerHTML = "<img src='paper.png'>";
+    } else if (computerChoice === 'scissors') {
+        document.getElementById('img2').innerHTML = "<img src='scissors.png'>";
+    }
+
+    if (userChoice === 'rock') {
+        document.getElementById('img').innerHTML = "<img src='rock.png'>";
+    } else if (userChoice === 'paper') {
+        document.getElementById('img').innerHTML = "<img src='paper.png'>";
+    } else if (userChoice === 'scissors') {
+        document.getElementById('img').innerHTML = "<img src='scissors.png'>";
+    }
+
+    
+    if (userChoice === computerChoice) {
+        document.getElementById('info').innerHTML += "<br>It's a draw!";
+        document.getElementById('info').style.color = 'blue';
+        gameResults.push('draw');
+
+    } else if ((userChoice === 'rock' && computerChoice === 'scissors') ||
+               (userChoice === 'scissors' && computerChoice === 'paper') ||
+               (userChoice === 'paper' && computerChoice === 'rock')) {
+        userScore++;
+        document.getElementById('info').innerHTML += "<br>You win!";
+        document.getElementById('info').style.color = 'green';
+        gameResults.push('win');
+    } else {
+        computerScore++;
+        document.getElementById('info').innerHTML += "<br>You lose!";
+        document.getElementById('info').style.color = 'red';
+        gameResults.push('lose');
+    }
+
+    document.getElementById('info').innerHTML += "<br>User score: " + userScore + "<br>Computer score: " + computerScore;
+}
+
+function getComputerChoice() {
+    for (let patternLength = 1; patternLength <= 10; patternLength++) {
+        if (userChoices.length >= 2 * patternLength) {
+            let recentChoices = userChoices.slice(-2 * patternLength);
+            let firstHalf = recentChoices.slice(0, patternLength);
+            let secondHalf = recentChoices.slice(patternLength);
+
+            if (firstHalf.join('') === secondHalf.join('')) {
+                // The user seems to be repeating a pattern of length patternLength.
+                // Predict their next move and beat it.
+                let predictedNextUserChoice = userChoices[userChoices.length - patternLength];
+                return beat(predictedNextUserChoice);
+            }
+        }
+    }
+
+    // Otherwise, choose randomly.
+    return choices[Math.floor(Math.random() * choices.length)];
+}
+function beat(choice) {
+    switch(choice) {
+        case 'rock':
+            return 'paper';
+        case 'paper':
+            return 'scissors';
+        case 'scissors':
+            return 'rock';
+    }
+}
+
+</script>
+</body>
+</html>
+
+
