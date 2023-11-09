@@ -6,7 +6,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #01C7E6;
+    background-color: #ee9999;
     overscroll-behavior: none;
     display: flex;
     justify-content: center;
@@ -14,15 +14,15 @@ body {
     height: 100vh;
 }
 #rock {
-    background-color: #0034E7;
+    background-color: #ff5b5b;
     transition-duration :0.4s;
 }
 #rock:hover {
-    background-color: #a90000;
+    background-color: #803cce;
     transition-duration :0.4s;
 }
 #paper {
-    background-color: #18d53e;
+    background-color: #dff800;
     transition-duration :0.4s;
 }
 #paper:hover {
@@ -30,12 +30,11 @@ body {
     transition-duration :0.4s;
 }
 #scissors {
-    background-color: #007BFF;
+    background-color: #dd7e03;
     transition-duration :0.4s;
 }
 #scissors:hover {
-    background-color: #7488CA 
-;
+    background-color: #0052a9;
     transition-duration :0.4s;
 }
 
@@ -139,7 +138,7 @@ transition-duration :0.4s;
 
 <div class="container">
     <h1>Rock, Paper, Scissors!</h1>
-    <p class="intro">This is a game of Rock, Paper, Scissors against a computer. Your goal is to beat the computer at this game. Click one of the colored buttons to make your choice and the computer will try to beat you. Press the reset button if you want to reset the game from 0.</p>
+    <p class="intro">This is the famous game of rock,paper, and scissors. How to play you may ask? just click upon of the objects listed and then see if you win it is very easy. Once you see if you have lost or won you just click reset and begin playing again. Hope you enjoy the game!!</p>
     
     <div class="answer1">
         <div class="image-container">
@@ -281,5 +280,3 @@ function beat(choice) {
 </script>
 </body>
 </html>
-
-
